@@ -1,0 +1,42 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Smiley - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\MICHAE~1\LOCALS~1\Temp\RSPED.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/Smiley.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"F:\Programming\C++\Games\Boxes\DialogSettings.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\MICHAE~1\LOCALS~1\Temp\RSPED.tmp" 
+Creating temporary file "C:\DOCUME~1\MICHAE~1\LOCALS~1\Temp\RSPEE.tmp" with contents
+[
+ddraw.lib dxguid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/Smiley.pdb" /debug /machine:I386 /out:"Debug/Smiley.exe" /pdbtype:sept 
+".\Debug\App.obj"
+".\Debug\Beast.obj"
+".\Debug\DialogSettings.obj"
+".\Debug\Main.obj"
+".\Debug\Procedure.obj"
+".\Debug\View.obj"
+".\Debug\winproc.obj"
+".\Debug\World.obj"
+".\Debug\WorldObjects.obj"
+".\Debug\Bitmap.obj"
+".\Debug\resource.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\MICHAE~1\LOCALS~1\Temp\RSPEE.tmp"
+<h3>Output Window</h3>
+Compiling...
+DialogSettings.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+Smiley.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
