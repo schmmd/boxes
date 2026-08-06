@@ -1,0 +1,173 @@
+/* Boxes - web port. Classic Win9x styling to match the original. */
+:root {
+  --face: #c0c0c0;
+  --shadow: #808080;
+  --dark: #404040;
+  --light: #ffffff;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+body {
+  background: #008080; /* classic teal desktop */
+  font-family: "Tahoma", "MS Sans Serif", "Segoe UI", sans-serif;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 8px 40px;
+  color: #000;
+}
+
+#app {
+  background: var(--face);
+  border: 2px solid;
+  border-color: var(--light) var(--dark) var(--dark) var(--light);
+  box-shadow: 1px 1px 0 var(--shadow), 4px 4px 12px rgba(0,0,0,.4);
+  width: min(100%, 620px);
+}
+
+/* Title bar */
+#titlebar {
+  background: linear-gradient(#000080, #1084d0);
+  color: #fff;
+  font-weight: bold;
+  padding: 3px 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+}
+#titlebar .titleicon { width: 16px; height: 16px; image-rendering: pixelated; }
+
+/* Menu bar */
+#menubar {
+  display: flex;
+  background: var(--face);
+  border-bottom: 1px solid var(--shadow);
+  padding: 1px 2px;
+  user-select: none;
+}
+.menu { position: relative; }
+.menu-title {
+  display: inline-block;
+  padding: 3px 8px;
+  cursor: default;
+}
+.menu.open .menu-title,
+.menu-title:hover { background: #000080; color: #fff; }
+.menu-drop {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 190px;
+  background: var(--face);
+  border: 2px solid;
+  border-color: var(--light) var(--dark) var(--dark) var(--light);
+  box-shadow: 2px 2px 5px rgba(0,0,0,.4);
+  z-index: 20;
+  padding: 2px;
+}
+.menu.open .menu-drop { display: block; }
+.menu-item {
+  padding: 4px 20px 4px 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  cursor: default;
+  white-space: nowrap;
+}
+.menu-item:hover { background: #000080; color: #fff; }
+.menu-item .accel { color: inherit; opacity: .8; }
+.menu-sep { height: 1px; background: var(--shadow); border-bottom: 1px solid var(--light); margin: 3px 2px; }
+
+/* Canvas */
+#screen {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: #fff;
+  outline: none;
+  border-top: 1px solid var(--shadow);
+  touch-action: manipulation;
+}
+
+/* Dialogs */
+.dialog-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.25);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+.dialog-overlay.open { display: flex; }
+.dialog {
+  background: var(--face);
+  border: 2px solid;
+  border-color: var(--light) var(--dark) var(--dark) var(--light);
+  box-shadow: 3px 3px 10px rgba(0,0,0,.5);
+  width: min(92vw, 340px);
+}
+.dialog-title {
+  background: linear-gradient(#000080, #1084d0);
+  color: #fff;
+  font-weight: bold;
+  padding: 3px 6px;
+}
+.dialog-body {
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+.dialog-body p { margin: 0; }
+.dialog-icon { width: 32px; height: 32px; image-rendering: pixelated; flex: none; }
+.settings-body { flex-direction: column; gap: 8px; }
+.settings-body label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.settings-body input {
+  width: 90px;
+  font-family: inherit;
+  font-size: 12px;
+  border: 2px solid;
+  border-color: var(--shadow) var(--light) var(--light) var(--shadow);
+  padding: 2px 4px;
+}
+.dialog-buttons {
+  padding: 4px 16px 16px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.dialog-buttons button {
+  font-family: inherit;
+  font-size: 12px;
+  min-width: 66px;
+  padding: 4px 10px;
+  background: var(--face);
+  border: 2px solid;
+  border-color: var(--light) var(--dark) var(--dark) var(--light);
+  cursor: pointer;
+}
+.dialog-buttons button:active {
+  border-color: var(--dark) var(--light) var(--light) var(--dark);
+}
+
+#hint {
+  color: #cfe8e8;
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 12px;
+}

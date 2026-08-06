@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boxes</title>
+<link rel="icon" type="image/png" href="sprites/box.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <!-- Title bar -->
+  <div id="titlebar">
+    <img class="titleicon" src="sprites/box.png" alt="">
+    <span>Boxes</span>
+  </div>
+
+  <!-- Menu bar -->
+  <div id="menubar">
+    <div class="menu" data-menu="file">
+      <span class="menu-title">File</span>
+      <div class="menu-drop">
+        <div class="menu-item" data-cmd="newgame">New Game<span class="accel">Ctrl+N</span></div>
+        <div class="menu-item" data-cmd="newarcade">New Arcade Game<span class="accel">Ctrl+A</span></div>
+        <div class="menu-item" data-cmd="pause">Pause Game<span class="accel">Ctrl+P</span></div>
+        <div class="menu-sep"></div>
+        <div class="menu-item" data-cmd="exit">Exit<span class="accel">Ctrl+Q</span></div>
+      </div>
+    </div>
+    <div class="menu" data-menu="help">
+      <span class="menu-title">Help</span>
+      <div class="menu-drop">
+        <div class="menu-item" data-cmd="instructions">Instructions<span class="accel">?</span></div>
+        <div class="menu-item" data-cmd="schmitztech">Schmitztech.com<span class="accel">!</span></div>
+        <div class="menu-sep"></div>
+        <div class="menu-item" data-cmd="about">About</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game canvas -->
+  <canvas id="screen" width="600" height="440" tabindex="0"></canvas>
+</div>
+
+<!-- Instructions dialog -->
+<div class="dialog-overlay" id="dlg-instructions">
+  <div class="dialog">
+    <div class="dialog-title">Instructions</div>
+    <div class="dialog-body">
+      <img class="dialog-icon" src="sprites/beast.png" alt="">
+      <p>Cage the squirrels by pushing boxes around them with the arrow keys.
+      But beware: the squirrels bite. As the levels increase not only do the
+      squirrels multiply, but they quicken and the boxes needed to confine them
+      become scarce!</p>
+    </div>
+    <div class="dialog-buttons">
+      <button class="dlg-ok">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- About dialog -->
+<div class="dialog-overlay" id="dlg-about">
+  <div class="dialog">
+    <div class="dialog-title">About Boxes</div>
+    <div class="dialog-body">
+      <img class="dialog-icon" src="sprites/box.png" alt="">
+      <p><strong>Boxes 1.02</strong><br>Copyright&copy; 2002 Michael Schmitz</p>
+    </div>
+    <div class="dialog-buttons">
+      <button class="dlg-ok">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- Arcade settings dialog -->
+<div class="dialog-overlay" id="dlg-settings">
+  <div class="dialog">
+    <div class="dialog-title">Arcade Game Settings</div>
+    <div class="dialog-body settings-body">
+      <label>Beast Delay (sec/60)<input type="number" id="set-delay" value="45"></label>
+      <label>Number of Beasts<input type="number" id="set-beasts" value="5"></label>
+      <label>Block Density (blocks / 100 tiles)<input type="number" id="set-density" value="30"></label>
+    </div>
+    <div class="dialog-buttons">
+      <button class="settings-ok">OK</button>
+      <button class="settings-cancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<p id="hint">Arrow keys move &bull; push boxes to cage the squirrels &bull; press a key to begin</p>
+
+<script src="game.js"></script>
+</body>
+</html>
