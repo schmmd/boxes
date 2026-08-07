@@ -19,7 +19,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;     /* centre the window vertically too */
   padding: 24px 8px 40px;
   color: #000;
 }
@@ -29,7 +28,7 @@ body {
   border: 2px solid;
   border-color: var(--light) var(--dark) var(--dark) var(--light);
   box-shadow: 1px 1px 0 var(--shadow), 4px 4px 12px rgba(0,0,0,.4);
-  width: fit-content;   /* hug the board, which JS sizes to fit the viewport */
+  width: min(100%, 600px);
   max-width: 100%;
 }
 
@@ -88,16 +87,15 @@ body {
 .menu-item .accel { color: inherit; opacity: .8; }
 .menu-sep { height: 1px; background: var(--shadow); border-bottom: 1px solid var(--light); margin: 3px 2px; }
 
-/* Canvas */
+/* Canvas. The board is a fixed 600x440 (landscape) image; it scales with the
+   window width on desktop. On a phone the mobile block below switches to a
+   flex layout that fits it to the viewport height too (see #board). */
+#board { display: contents; }   /* inert wrapper on desktop */
 #screen {
   display: block;
-  /* JS (fitScreen) sets explicit width/height so the whole board fits the
-     viewport in both orientations. These are first-paint fallbacks that keep
-     the aspect ratio and never overflow width or height. */
-  width: auto;
-  height: auto;
+  width: 100%;
   max-width: 100%;
-  max-height: calc(100dvh - 150px);
+  height: auto;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   background: #fff;
@@ -197,13 +195,47 @@ body {
 
 /* ---- mobile / touch ---------------------------------------------------- */
 @media (max-width: 640px), (pointer: coarse) {
+  html, body { height: 100%; }
   body {
+    /* Fill the screen exactly and never scroll: the board is fit to the
+       viewport below, so there is nothing off-screen to reach. */
+    height: 100dvh;
+    justify-content: center;
+    overflow: hidden;
     /* keep clear of notches / rounded corners while staying compact */
     padding:
-      max(10px, env(safe-area-inset-top))
+      max(6px, env(safe-area-inset-top))
       max(6px, env(safe-area-inset-right))
-      max(16px, env(safe-area-inset-bottom))
+      max(10px, env(safe-area-inset-bottom))
       max(6px, env(safe-area-inset-left));
+  }
+
+  /* The window fills the available height; the board sits inside it, scaled to
+     the largest size that fits BOTH the width and the remaining height, so the
+     whole board is always visible in either orientation. */
+  #app {
+    width: min(100%, 600px);
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  #titlebar, #menubar { flex: none; }
+  #board {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--face);
+  }
+  /* width/height auto + max 100% = letterbox to fit, aspect ratio preserved */
+  #screen {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
   }
 
   /* bigger tap targets for the Win9x menu and dialog controls */
@@ -213,5 +245,6 @@ body {
   .dialog-buttons button { min-width: 84px; padding: 10px 14px; font-size: 14px; }
   .settings-body input { padding: 6px; font-size: 14px; }
 
-  #hint { font-size: 13px; margin-top: 10px; }
+  #hint { font-size: 13px; margin: 8px 0 0; }
+  #rotatehint { margin-top: 6px; }
 }

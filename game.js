@@ -665,42 +665,6 @@ function exitToIntro() {
   render();
 }
 
-// ---- Fit the board on screen ---------------------------------------------
-// The board is a fixed 600x440 (landscape) canvas. Size it so the whole
-// window — title bar, menu bar and board — fits the viewport in either
-// orientation. Nothing is clipped, so there is nothing to scroll to (the
-// canvas eats touch gestures, so off-screen content would be unreachable).
-function outerBlockHeight(el) {
-  if (el.offsetHeight === 0) return 0;   // display:none (e.g. rotate hint)
-  const s = getComputedStyle(el);
-  return el.offsetHeight + parseFloat(s.marginTop) + parseFloat(s.marginBottom);
-}
-function fitScreen() {
-  const ar = canvas.width / canvas.height;                 // 600 / 440
-  const cs = getComputedStyle(document.body);
-  const padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
-  const padY = parseFloat(cs.paddingTop)  + parseFloat(cs.paddingBottom);
-
-  // vertical space taken by everything other than the board itself
-  const chrome =
-      document.getElementById('titlebar').offsetHeight +
-      document.getElementById('menubar').offsetHeight +
-      outerBlockHeight(document.getElementById('hint')) +
-      outerBlockHeight(document.getElementById('rotatehint')) +
-      4;   // #app border (top+bottom) + canvas border-top
-
-  const availW = window.innerWidth  - padX - 6;   // small margin for the app border
-  const availH = window.innerHeight - padY - chrome;
-
-  const w = Math.min(availW, Math.max(availH, 40) * ar, 600);
-  canvas.style.width  = w + 'px';
-  canvas.style.height = w / ar + 'px';
-}
-addEventListener('resize', fitScreen);
-addEventListener('orientationchange', fitScreen);
-addEventListener('load', fitScreen);   // re-fit once fonts settle the chrome height
-fitScreen();
-
 // ---- Boot ----------------------------------------------------------------
 loadHighscore();
 loadSprites().then(() => {

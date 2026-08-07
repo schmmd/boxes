@@ -9,7 +9,7 @@
  *
  * Bump CACHE when the shell changes so old caches are cleaned up on activate.
  */
-const CACHE = 'boxes-v1';
+const CACHE = 'boxes-v2';
 const SHELL = [
   './',
   './index.html',
