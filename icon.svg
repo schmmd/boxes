@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#008080"/>
+  <!-- 3x3 grid of boxes: a caged center square -->
+  <g fill="#c8a05a" stroke="#5a3d15" stroke-width="8">
+    <rect x="72"  y="72"  width="112" height="112" rx="8"/>
+    <rect x="200" y="72"  width="112" height="112" rx="8"/>
+    <rect x="328" y="72"  width="112" height="112" rx="8"/>
+    <rect x="72"  y="200" width="112" height="112" rx="8"/>
+    <rect x="328" y="200" width="112" height="112" rx="8"/>
+    <rect x="72"  y="328" width="112" height="112" rx="8"/>
+    <rect x="200" y="328" width="112" height="112" rx="8"/>
+    <rect x="328" y="328" width="112" height="112" rx="8"/>
+  </g>
+  <!-- caged center: a face -->
+  <rect x="200" y="200" width="112" height="112" rx="8" fill="#ffffff" stroke="#000000" stroke-width="6"/>
+  <circle cx="232" cy="240" r="10" fill="#000000"/>
+  <circle cx="280" cy="240" r="10" fill="#000000"/>
+  <path d="M228 276 q28 22 56 0" fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round"/>
+</svg>
