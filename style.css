@@ -15,9 +15,11 @@ body {
   background: #008080; /* classic teal desktop */
   font-family: "Tahoma", "MS Sans Serif", "Segoe UI", sans-serif;
   font-size: 13px;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;     /* centre the window vertically too */
   padding: 24px 8px 40px;
   color: #000;
 }
@@ -27,7 +29,7 @@ body {
   border: 2px solid;
   border-color: var(--light) var(--dark) var(--dark) var(--light);
   box-shadow: 1px 1px 0 var(--shadow), 4px 4px 12px rgba(0,0,0,.4);
-  width: min(100%, 620px);
+  width: fit-content;   /* hug the board, which JS sizes to fit the viewport */
   max-width: 100%;
 }
 
@@ -89,9 +91,13 @@ body {
 /* Canvas */
 #screen {
   display: block;
-  width: 100%;
-  max-width: 100%;
+  /* JS (fitScreen) sets explicit width/height so the whole board fits the
+     viewport in both orientations. These are first-paint fallbacks that keep
+     the aspect ratio and never overflow width or height. */
+  width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 150px);
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   background: #fff;
@@ -175,6 +181,20 @@ body {
   font-size: 12px;
 }
 
+/* Shown only on a portrait touch screen, where a landscape board is cramped. */
+#rotatehint {
+  display: none;
+  color: #eaf6f6;
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: 12px;
+  opacity: .85;
+}
+#rotatehint::before { content: "\21BB\00A0"; }  /* ↻ */
+@media (orientation: portrait) and (pointer: coarse) {
+  #rotatehint { display: block; }
+}
+
 /* ---- mobile / touch ---------------------------------------------------- */
 @media (max-width: 640px), (pointer: coarse) {
   body {
@@ -185,9 +205,6 @@ body {
       max(16px, env(safe-area-inset-bottom))
       max(6px, env(safe-area-inset-left));
   }
-
-  /* the whole window fills the phone width; the canvas scales with it */
-  #app { width: 100%; }
 
   /* bigger tap targets for the Win9x menu and dialog controls */
   .menu-title { padding: 8px 12px; }
