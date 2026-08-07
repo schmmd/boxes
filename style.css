@@ -97,7 +97,7 @@ body {
   background: #fff;
   outline: none;
   border-top: 1px solid var(--shadow);
-  touch-action: none;   /* swipes drive the game; no scroll / double-tap zoom */
+  touch-action: none;   /* taps drive the game; no scroll / double-tap zoom */
 }
 
 /* Dialogs */

@@ -579,7 +579,9 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// touch / click-to-move (swipe) for mobile
+// touch: tap a region of the board to move that way. The board splits into
+// four triangles from the centre — tap the top to go up, the bottom for down,
+// the left/right sides to go left/right. A tap while won/lost starts the next.
 let touchStart = null;
 canvas.addEventListener('touchstart', (e) => {
   const t = e.changedTouches[0];
@@ -588,12 +590,15 @@ canvas.addEventListener('touchstart', (e) => {
 canvas.addEventListener('touchend', (e) => {
   if (!touchStart) return;
   const t = e.changedTouches[0];
-  const dx = t.clientX - touchStart.x, dy = t.clientY - touchStart.y;
+  // treat a drag (rather than a tap) as nothing, so scrolling gestures don't move
+  const dragged = Math.abs(t.clientX - touchStart.x) > 16 || Math.abs(t.clientY - touchStart.y) > 16;
   touchStart = null;
-  if (Math.abs(dx) < 12 && Math.abs(dy) < 12) {
-    if (W.won || W.lost) handleEnter();
-    return;
-  }
+  if (dragged) return;
+  if (W.won || W.lost) { handleEnter(); return; }
+  if (anyDialogOpen()) return;
+  const r = canvas.getBoundingClientRect();
+  const dx = (t.clientX - r.left) - r.width / 2;   // offset of the tap from the board centre
+  const dy = (t.clientY - r.top) - r.height / 2;
   if (Math.abs(dx) > Math.abs(dy)) handleArrow(dx > 0 ? 1 : -1, 0);
   else handleArrow(0, dy > 0 ? 1 : -1);
 }, { passive: true });
