@@ -248,3 +248,18 @@ body {
   #hint { font-size: 13px; margin: 8px 0 0; }
   #rotatehint { margin-top: 6px; }
 }
+
+/* Landscape phones are short on height, and the board's limiting dimension is
+   height there. Trim every bit of vertical chrome so the board grows to fill
+   the space: minimal top/bottom padding, slimmer bars, and drop the hint
+   (its "arrow keys" tip is desktop-only anyway — on touch you tap the board). */
+@media (pointer: coarse) and (orientation: landscape) {
+  body {
+    padding-top: max(3px, env(safe-area-inset-top));
+    padding-bottom: max(3px, env(safe-area-inset-bottom));
+  }
+  #titlebar { padding: 2px 4px; }
+  #titlebar .titleicon { width: 14px; height: 14px; }
+  .menu-title { padding: 4px 12px; }
+  #hint { display: none; }
+}
