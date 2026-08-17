@@ -7,6 +7,8 @@
 }
 * { box-sizing: border-box; }
 html, body {
+  /* keep double-tap zoom off the chrome while leaving pinch zoom available */
+  touch-action: manipulation;
   margin: 0;
   min-height: 100%;
   overscroll-behavior: none;   /* no pull-to-refresh / bounce on mobile */
